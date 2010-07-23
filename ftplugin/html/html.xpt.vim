@@ -2,21 +2,30 @@
 "
 XPTemplate priority=personal
 
-XPTvar $blank   ' '
+let s:f = g:XPTfuncs()
+
+XPTvar $blank ' '
+XPTvar $js_dir 'scripts'
+XPTvar $css_dir 'styles'
+XPTvar $jq_ver '1.4.2.min'
+XPTvar $empty ''
 
 XPT copy_comment hidden
 <!-- © Copyright `strftime("%Y") $author^. All Rights Reserved. -->
 
-XPT aut abbr alias=meta " <meta name="description"...
-XSET meta_name=author
+XPT copyright "
+&copy;`strftime("%Y") $author^ &mdash; All Rights Reserved
+
+XPT meta
+<meta name="`$_xSnipName^" content="`meta_content^" />
+
+XPT author alias=meta " <meta name="author"...
 XSET meta_content=$author
 
-XPT desc abbr alias=meta " <meta name="description"...
-XSET meta_name=description
+XPT description alias=meta " <meta name="description"...
 XSET meta_content=Echo('')
 
-XPT key abbr alias=meta " <meta name="keywords"...
-XSET meta_name=keywords
+XPT keywords alias=meta " <meta name="keywords"...
 XSET meta_content=Echo('')
 
 XPT skel abbr synonym=html|xhtml " xhtml skeleton
@@ -26,7 +35,7 @@ XPT skel abbr synonym=html|xhtml " xhtml skeleton
 <head>
     `:title:^
     `:contenttype:^`
-    `more^ ^
+    `more^.^
 </head>
 <body>
     `cursor^
@@ -35,35 +44,71 @@ XPT skel abbr synonym=html|xhtml " xhtml skeleton
 `:copy_comment:^
 
 XPT link " <link rel="stylesheet" ..>
-<link rel="stylesheet" type="text/css" href="`stylesheets/^`base.css^" />
+XSET dir=$css_dir/
+XSET src=base.css
+<link rel="stylesheet" type="text/css" href="`dir^`src^" />
 
-XPT jquery " jquery script link
-XSET dir=ChooseStr( 'scripts/', 'javascripts/' )
-<script language="javascript" type="text/javascript" src="`dir^jquery`^.js"></script>
+XPT reset synonym=fonts|base|grids|layout
+XSET name=$_xSnipName.css
+`:link( { 'src' : 'name' } ):^
 
-XPT di abbr wrap=content " <div id="">.</div>
-XSET val=$blank
-XSET content=$blank
-<div` id="`val`"^>`content^</div>
+XPT jquery abbr synonym=jq " <script... src="jquery...
+XSET dir=$js_dir/
+XSET ver=$jq_ver
+<script type="text/javascript" src="`dir^jquery`-`ver^.js"></script>
 
-XPT div abbr wrap=content " <div id..>\n\n</div>\n<!-- id..
+XPT script " <script... src="...
+XSET dir=$js_dir/
+XSET src=$empty
+<script type="text/javascript" src="`dir^`src^.js"></script>
+
+XPT jplug abbr synonym=jfile|jp|jf alias=script
+
+XPT jscript synonym=js
+<script type="text/javascript">
+    `cursor^
+</script>
+
+XPT di wrap=content " <div id="">.</div>
 XSET val=Echo('')
 XSET val|post=Echo(V()=~'\V\^ id=""\$\|val' ? '' : V())
-XSET content=Echo('')
-XSET content|post=Echo(V()=~'\V\^  \$\|val' ? '' : V())
+XSET content|ontype=html_cont_ontype()
+<div` id="`val`"^>`content^^`content^html_cont_helper()^</div>
+
+XPT div abbr wrap=cursor " <div id..>\n\n</div>\n<!-- id..
+XSET val=Echo('')
+XSET val|post=Echo(V()=~'\V\^ id=""\$\|val' ? '' : V())
 <div` id="`val`"^>
-`  `content^`cursor^
+`cursor^
 </div>
 <!--`val^ -->
 
-XPT ol abbr
-<ol` `att?^>`
+XPT list "
+XSET type=ul
+<`type^` `att?^>`
 `...{{^
-<li>`^</li>`
+<li` `att?^>`^</li>`
 `...^`}}^
-</ol>
+</`type^>
 
 XPT ul abbr alias=_tagAttr
 
-XPT diva " tips
-`:div( { 'content' : ':a:' } ):^
+XPT ol abbr alias=_tagAttr
+
+XPT li abbr
+XSET content=Echo('')
+<li>`content^</li>`
+`...{{^
+<li>`content^</li>`
+`...^`}}^
+
+XPT lia abbr
+XSET href=#
+`:li( { 'content' : ':a:' } ):^
+
+XPT nav synonym=menu "
+XSET nav=$_xSnipName
+<ul` id="`nav`"^>
+    `:lia:^
+</ul>
+
