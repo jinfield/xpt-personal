@@ -43,7 +43,7 @@ XPT skel abbr synonym=html|xhtml " xhtml skeleton
 </html>
 `:copy_comment:^
 
-XPT link " <link rel="stylesheet" ..>
+XPT link " <link rel='stylesheet'...
 XSET dir=$css_dir/
 XSET src=base.css
 <link rel="stylesheet" type="text/css" href="`dir^`src^" />
@@ -83,32 +83,24 @@ XSET val|post=Echo(V()=~'\V\^ id=""\$\|val' ? '' : V())
 </div>
 <!--`val^ -->
 
-XPT list "
-XSET type=ul
-<`type^` `att?^>`
-`...{{^
-<li` `att?^>`^</li>`
-`...^`}}^
-</`type^>
+XPT ul abbr alias=_tagAttr " <ul att?...
 
-XPT ul abbr alias=_tagAttr
+XPT ol abbr alias=_tagAttr " <ol att?...
 
-XPT ol abbr alias=_tagAttr
-
-XPT li abbr
+XPT li abbr " <li>..</li>...
 XSET content=Echo('')
-<li>`content^</li>`
-`...{{^
-<li>`content^</li>`
-`...^`}}^
+<li>`content^</li>
 
-XPT lia abbr
+XPT lia abbr " <li><a href=...
 XSET href=#
 `:li( { 'content' : ':a:' } ):^
 
-XPT nav synonym=menu "
+XPT nav synonym=menu " <ul id='nav'...
 XSET nav=$_xSnipName
 <ul` id="`nav`"^>
-    `:lia:^
+    `:lia:^`
+    `...^
+    `:lia:^`
+    `...^
 </ul>
 
