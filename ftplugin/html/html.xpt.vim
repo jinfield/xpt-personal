@@ -28,14 +28,23 @@ XSET meta_content=Echo('')
 XPT keywords alias=meta " <meta name="keywords"...
 XSET meta_content=Echo('')
 
+XPT doctype " <!DOCTYPE...
+<!DOCTYPE html` `PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"^>
+
+XPT doctype5 " <!DOCTYPE html>
+<!DOCTYPE html>
+
+XPT content5 " <meta charset...
+<meta charset="utf-8" />
+
 XPT skel abbr synonym=html|xhtml " xhtml skeleton
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+`:doctype5:^
 <html>
 <head>
     `:title:^
-    `:contenttype:^`
-    `more^.^
+    `:content5:^`
+    `author^
 </head>
 <body>
     `cursor^
@@ -47,6 +56,15 @@ XPT link " <link rel='stylesheet'...
 XSET dir=$css_dir/
 XSET src=base.css
 <link rel="stylesheet" type="text/css" href="`dir^`src^" />
+
+XPT alternate " <link rel='alternate'...
+XSET type=application/rss+xml
+XSET url=/feed/
+<link rel="alternate" type="`type^" title="`title^" href="`url^" />
+
+XPT icon " <link rel='shortcut icon'...
+XSET url=/favicon.ico
+<link rel="shortcut icon" href="`url^" />
 
 XPT reset synonym=fonts|base|grids|layout
 XSET name=$_xSnipName.css
