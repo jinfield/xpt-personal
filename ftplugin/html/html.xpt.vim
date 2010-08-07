@@ -35,7 +35,7 @@ XPT doctype " <!DOCTYPE...
 XPT doctype5 " <!DOCTYPE html>
 <!DOCTYPE html>
 
-XPT content5 " <meta charset...
+XPT charset " <meta charset...
 <meta charset="utf-8" />
 
 XPT skel abbr synonym=html|xhtml " xhtml skeleton
@@ -43,7 +43,7 @@ XPT skel abbr synonym=html|xhtml " xhtml skeleton
 <html>
 <head>
     `:title:^
-    `:content5:^`
+    `:charset:^`
     `author^
 </head>
 <body>
@@ -122,3 +122,7 @@ XSET nav=$_xSnipName
     `...^
 </ul>
 
+XPT a wrap=content " <a href...
+XSET href=#
+XSET content=Echo('')
+<a href="`href^">`content^</a>
