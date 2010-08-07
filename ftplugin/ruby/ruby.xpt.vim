@@ -31,6 +31,9 @@ XSET bool=true`^
 XPT :html alias=key
 XSET val={ `html^ }
 
+XPT :media alias=key
+XSET val='`screen^'
+
 " RSpec snippets
 
 XPT loop " loop do .. end
@@ -47,5 +50,4 @@ XSET name=it
 `:loop({ 'loop' : 'name' }):^
 
 XPT :content " $_xSnipName => "val"
-XSET val="`str^"
 `:key:^

@@ -5,8 +5,8 @@ XPTemplate priority=personal
 let s:f = g:XPTfuncs()
 
 XPTvar $blank ' '
-XPTvar $js_dir 'scripts'
-XPTvar $css_dir 'styles'
+XPTvar $js_dir 'javascripts'
+XPTvar $css_dir 'stylesheets'
 XPTvar $jq_ver '1.4.2.min'
 XPTvar $empty ''
 
@@ -55,7 +55,8 @@ XPT skel abbr synonym=html|xhtml " xhtml skeleton
 XPT link " <link rel='stylesheet'...
 XSET dir=$css_dir/
 XSET src=base.css
-<link rel="stylesheet" type="text/css" href="`dir^`src^" />
+XSET media=screen
+<link rel="stylesheet" type="text/css" href="`dir^`src^"` media="`media`"^ />
 
 XPT alternate " <link rel='alternate'...
 XSET type=application/rss+xml
@@ -66,9 +67,13 @@ XPT icon " <link rel='shortcut icon'...
 XSET url=/favicon.ico
 <link rel="shortcut icon" href="`url^" />
 
-XPT reset synonym=fonts|base|grids|layout
+XPT reset synonym=fonts|base|grids|layout|screen
 XSET name=$_xSnipName.css
 `:link( { 'src' : 'name' } ):^
+
+XPT print alias=link
+XSET src=print.css
+XSET media=print
 
 XPT jquery abbr synonym=jq " <script... src="jquery...
 XSET dir=$js_dir/
@@ -126,3 +131,15 @@ XPT a wrap=content " <a href...
 XSET href=#
 XSET content=Echo('')
 <a href="`href^">`content^</a>
+
+XPT lie8 wrap=content " <!--[if lt IE 8]>...
+XSET content=Echo('')
+<!--[if lt IE 8]>
+`content^
+<![endif]-->
+
+XPT lie9 wrap=content " <!--[if lt IE 9]>...
+XSET content=Echo('')
+<!--[if lt IE 9]>
+`content^
+<![endif]-->
