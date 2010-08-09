@@ -49,7 +49,13 @@ XSET target=Echo('')
 <%= link_to `link^, `target^ %>
 
 XPT link_to_img synonym=ltim " <%= link_to image...
-`:link_to({'link' : ':it:'}):^
+`:link_to({ 'link' : ':it:' }):^
+
+XPT lta
+`:li({ 'content' : ':link_to:' }):^
+
+XPT enav synonym=nave,nav5
+`:nav({ ':lia:' : ':lta:' }):^
 
 XPT form_for synonym=ff " <% form_for @model do...
 <% form_for `@obj^ do |`f^| -%>

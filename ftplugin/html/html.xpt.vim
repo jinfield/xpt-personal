@@ -4,7 +4,6 @@ XPTemplate priority=personal
 
 let s:f = g:XPTfuncs()
 
-XPTvar $blank ' '
 XPTvar $js_dir 'javascripts'
 XPTvar $css_dir 'stylesheets'
 XPTvar $jq_ver '1.4.2.min'
@@ -32,7 +31,7 @@ XPT doctype " <!DOCTYPE...
 <!DOCTYPE html` `PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"^>
 
-XPT doctype5 " <!DOCTYPE html>
+XPT doctype5 synonym=doc5 " <!DOCTYPE html>
 <!DOCTYPE html>
 
 XPT charset " <meta charset...
@@ -106,25 +105,30 @@ XSET val|post=Echo(V()=~'\V\^ id=""\$\|val' ? '' : V())
 </div>
 <!--`val^ -->
 
-XPT ul abbr alias=_tagAttr " <ul att?...
+XPT blockTag wrap=content hidden " <$_xSnipName >\n .. \n</$_xSnipName>
+<`$_xSnipName^` `att?^>
+    `content^^
+</`$_xSnipName^>
 
-XPT ol abbr alias=_tagAttr " <ol att?...
+XPT ul abbr alias=blockTag
+
+XPT ol abbr alias=blockTag
 
 XPT li abbr " <li>..</li>...
 XSET content=Echo('')
-<li>`content^</li>
+<li>`content^</li>`
+`...^
+<li>`content^</li>`
+`...^
 
 XPT lia abbr " <li><a href=...
 XSET href=#
 `:li( { 'content' : ':a:' } ):^
 
-XPT nav synonym=menu " <ul id='nav'...
-XSET nav=$_xSnipName
-<ul` id="`nav`"^>
-    `:lia:^`
-    `...^
-    `:lia:^`
-    `...^
+XPT menu synonym=navigation " <ul id='menu'...
+XSET id=$_xSnipName
+<ul` id="`id`"^>
+    `:lia:^
 </ul>
 
 XPT a wrap=content " <a href...
@@ -143,3 +147,23 @@ XSET content=Echo('')
 <!--[if lt IE 9]>
 `content^
 <![endif]-->
+
+"
+" HTML5 Snippets
+"
+
+XPT header alias=blockTag
+
+XPT section alias=blockTag
+
+XPT aside alias=blockTag
+
+XPT nav " <nav class="...
+<nav` `att?^>
+<ul>
+    `:lia:^
+</ul>
+</nav>
+
+XPT html5shiv synonym=shiv,5shiv
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
