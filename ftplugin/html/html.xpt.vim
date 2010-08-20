@@ -91,13 +91,11 @@ XPT jscript synonym=js
     `cursor^
 </script>
 
-XPT di wrap=content " <div id="">.</div>
-XSET val=Echo('')
-XSET val|post=Echo(V()=~'\V\^ id=""\$\|val' ? '' : V())
+XPT div wrap=content synonym=span " <$_xSnipName att?>..</$_xSnipName>
 XSET content|ontype=html_cont_ontype()
-<div` id="`val`"^>`content^^`content^html_cont_helper()^</div>
+<`$_xSnipName^` `att?^>`content^^`content^html_cont_helper()^</`$_xSnipName^>
 
-XPT div abbr wrap=cursor " <div id..>\n\n</div>\n<!-- id..
+XPT di wrap=cursor " <div id..>\n\n</div>\n<!-- id..
 XSET val=Echo('')
 XSET val|post=Echo(V()=~'\V\^ id=""\$\|val' ? '' : V())
 <div` id="`val`"^>
@@ -157,6 +155,8 @@ XPT header alias=blockTag
 XPT section alias=blockTag
 
 XPT aside alias=blockTag
+
+XPT footer alias=blockTag
 
 XPT nav " <nav class="...
 <nav` `att?^>
