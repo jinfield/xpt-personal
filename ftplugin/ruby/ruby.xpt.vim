@@ -20,7 +20,7 @@ XPT :cols synonym=:rows|:size|:maxsize|:null|:url " $_xSnipName => val
 XPT :object synonym=:collection|:locals|:layout|:method " $_xSnipName => val
 `:key:^
 
-XPT :id synonym=:class|:alt|:title|:action|:controller " $_xSnipName => 'val'
+XPT :id synonym=:class|:alt|:title|:action|:controller|:to " $_xSnipName => 'val'
 XSET str='`val^'
 `:key({ 'val' : 'str' }):^
 

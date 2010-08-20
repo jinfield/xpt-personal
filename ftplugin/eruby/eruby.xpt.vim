@@ -4,6 +4,12 @@ XPTemplate priority=personal+
 
 XPTvar $img_path 'images'
 
+XPT each " <% object.each do |arg, arg|...
+XSET cursor=Echo('')
+<% `obj^.each do |`arg*^| -%>
+    `cursor^
+`:end:^
+
 XPT end " <% end -%>
 <% end -%>
 
@@ -36,15 +42,20 @@ XPT ifl " <% if flash[...
 <div id="`notice^"><%= flash[:`notice^] %></div>
 `:end:^
 
+XPT flash.each synonym=flea " <% flash.each do |args...
+XSET cursor=Echo('')
+<% flash.each do |key, value| -%>
+<div class="flash <%= key %>"><%= value %></div>
+`:end:^
+
 XPT it hidden " embed-able image tag
 XSET image_path=$img_path/
-image_tag("`image_path^`image_file^"`, `opt?^)
+image_tag('`image_path^`image_file^'`, `opt?^)
 
 XPT image_tag synonym=imt " <%= image_tag...
 <%= `:it:^ %>
 
 XPT link_to synonym=lt|lit " <%= link_to...
-XSET link='`link_text^'
 XSET target=Echo('')
 <%= link_to `link^, `target^ %>
 
@@ -58,15 +69,15 @@ XPT enav synonym=nave,nav5
 `:nav({ ':lia:' : ':lta:' }):^
 
 XPT form_for synonym=ff " <% form_for @model do...
-<% form_for `@obj^ do |`f^| -%>
+<%= form_for `@obj^ do |`f^| %>
 `  `cursor^
 `:end:^
 
 XPT flabel " <%= f.label...
-<%= `f^.label `:object^, '`label^' %>
+<%= `f^.label `object^`, '`label`'^ %>
 
 XPT ftxt " <%= f.text_field...
-<%= `f^.text_field `:object^ %>
+<%= `f^.text_field `object^ %>
 
 XPT ftxa " <%= f.text_area...
 <%= `f^.text_area `object^ %>
@@ -92,12 +103,16 @@ XPT ffile " <% f.file_field...
 XPT fsubmit " <%= f.submit...
 <%= `f^.submit '`label^' %>
 
-XPT render_partial synonym=rp " <%= render :partial...
+XPT render " <%= render ...
 XSET name=Echo('')
-<%= render :partial => "`name^" %>
+<%= render '`name^' -%>
+
+XPT render_partial synonym=rp,partial " <%= render :partial...
+XSET name=Echo('')
+<%= render :partial => '`name^' -%>
 
 XPT submit_tag " <%= submit_tag...
-<%= submit_tag "`label^" %>
+<%= submit_tag '`label^' %>
 
 XPT stylesheet_link_tag synonym=slt " <%= stylesheet_link_tag...
 <%= stylesheet_link_tag `^ %>
