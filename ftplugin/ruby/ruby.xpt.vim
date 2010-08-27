@@ -49,22 +49,42 @@ XSET val='`screen^'
 XPT image_tag synonym=imt " image_tag...
 image_tag('`filename^'`, `opt?^)
 
-" RSpec snippets
-
-XPT loop " $_xSnipName args? do .. end
+XPT loop wrap=content synonym=lambda " $_xSnipName args? do .. end
 XSET content=Echo('')
 `$_xSnipName^` `args^ do
 `  `content^
 end
 
+XPT doe abbr " do .. end
+do
+    `cursor^
+end
+
+XPT pid " params[:id]
+params[:id]
+
+" Rails 3 Stuff
+
+XPT match " match '/path', :to => ...
+XSET path=Echo('')
+match '`path^', :to => '`controller#method^'
+
+XPT flash " flash[:class]...
+flash[:`error^] = "`message^"
+
+XPT fln abbr " flash.now[:class]...
+flash.now[:`error^] = "`message^"
+
+" RSpec snippets
+
 XPT describe synonym=it alias=loop
 XSET args="`^"
 
-XPT resp
+XPT resp abbr
 response.
 
-XPT :content " $_xSnipName => "val"
-`:key:^
+XPT :content synonym=:cnt " :content => "val"
+:content => `^
 
 XPT shd abbr " should ...
 should `^
@@ -77,3 +97,6 @@ should be_
 
 XPT shnb abbr " should_not be_
 should_not be_
+
+XPT hvs abbr
+have_selector(`^)

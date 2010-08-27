@@ -6,7 +6,7 @@ let s:f = g:XPTfuncs()
 
 XPTvar $js_dir 'javascripts'
 XPTvar $css_dir 'stylesheets'
-XPTvar $jq_ver '1.4.2.min'
+XPTvar $jq_ver '1.4.2'
 XPTvar $empty ''
 
 XPT copy_comment hidden
@@ -75,9 +75,8 @@ XSET src=print.css
 XSET media=print
 
 XPT jquery abbr synonym=jq " <script... src="jquery...
-XSET dir=$js_dir/
 XSET ver=$jq_ver
-<script type="text/javascript" src="`dir^jquery`-`ver^.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/`ver^/jquery.min.js"></script>
 
 XPT script " <script... src="...
 XSET dir=$js_dir/
