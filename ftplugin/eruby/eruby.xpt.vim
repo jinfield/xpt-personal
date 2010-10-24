@@ -49,8 +49,7 @@ XSET cursor=Echo('')
 `:end:^
 
 XPT it hidden " embed-able image tag
-XSET image_path=$img_path/
-image_tag('`image_path^`image_file^'`, `opt?^)
+image_tag(`image_path^`, `opt?^)
 
 XPT image_tag synonym=imt " <%= image_tag...
 <%= `:it:^ %>

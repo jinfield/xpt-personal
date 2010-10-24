@@ -90,8 +90,10 @@ XPT jscript synonym=js
     `cursor^
 </script>
 
-XPT div wrap=content synonym=span " <$_xSnipName att?>..</$_xSnipName>
+XPT tagAttr wrap=content hidden " <$_xSnipName att?>..</$_xSnipName>
 XSET content|ontype=html_cont_ontype()
+XSET att?=Echo('')
+XSET att?|post=Echo(V()=~'\V\^ \$\|att?' ? '' : V())
 <`$_xSnipName^` `att?^>`content^^`content^html_cont_helper()^</`$_xSnipName^>
 
 XPT di wrap=cursor " <div id..>\n\n</div>\n<!-- id..
@@ -102,14 +104,25 @@ XSET val|post=Echo(V()=~'\V\^ id=""\$\|val' ? '' : V())
 </div>
 <!--`val^ -->
 
-XPT blockTag wrap=content hidden " <$_xSnipName >\n .. \n</$_xSnipName>
-<`$_xSnipName^` `att?^>
-    `content^^
-</`$_xSnipName^>
+XPT span alias=tagAttr
 
-XPT ul abbr alias=blockTag
+XPT div alias=tagAttr
 
-XPT ol abbr alias=blockTag
+XPT tr abbr alias=tagAttr
+
+XPT td abbr alias=tagAttr
+
+XPT ul abbr alias=tagAttr
+
+XPT ol abbr alias=tagAttr
+
+XPT dl abbr alias=tagAttr
+
+XPT dt abbr alias=tagAttr
+
+XPT dd abbr alias=tagAttr
+
+XPT br abbr alias=_shorttag
 
 XPT li abbr " <li>..</li>...
 XSET content=Echo('')
@@ -149,13 +162,13 @@ XSET content=Echo('')
 " HTML5 Snippets
 "
 
-XPT header alias=blockTag
+XPT header alias=tagAttr
 
-XPT section alias=blockTag
+XPT section alias=tagAttr
 
-XPT aside alias=blockTag
+XPT aside alias=tagAttr
 
-XPT footer alias=blockTag
+XPT footer alias=tagAttr
 
 XPT nav " <nav class="...
 <nav` `att?^>

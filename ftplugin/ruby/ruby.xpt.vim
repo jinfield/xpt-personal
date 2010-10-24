@@ -22,6 +22,10 @@ XSET bool=true`^
 
 " eRuby attribute snippets
 
+XPT : " :key => val
+XSET val=Echo('')
+:`key^ => `val^
+
 XPT key hidden " $_xSnipName => val
 XSET val=Echo('')
 `$_xSnipName^ => `val^
