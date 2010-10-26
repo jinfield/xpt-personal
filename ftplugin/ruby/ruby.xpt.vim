@@ -16,7 +16,7 @@ attr`_`what^ :`attr*^
 XPT validates " validates :attr ...
 validates :`attr^, `^
 
-XPT :presence synonym=:uniqueness|:acceptance|:confirmation|:numericallity " $_xSnipName => true
+XPT :presence synonym=:uniqueness|:acceptance|:confirmation|:numericality " $_xSnipName => true
 XSET bool=true`^
 `:key({ 'val' : 'bool' }):^
 
@@ -81,7 +81,7 @@ flash.now[:`error^] = "`message^"
 
 " RSpec snippets
 
-XPT describe synonym=it alias=loop
+XPT describe synonym=it|test alias=loop
 XSET args="`^"
 
 XPT resp abbr
