@@ -42,6 +42,11 @@ XPT ifl " <% if flash[...
 <div id="`notice^"><%= flash[:`notice^] %></div>
 `:end:^
 
+XPT ifn " <% if notice...
+<% if `notice^ -%>
+<p id="`notice^"><%= `notice^ %></p>
+<% end -%>
+
 XPT flash.each synonym=flea " <% flash.each do |args...
 XSET cursor=Echo('')
 <% flash.each do |key, value| -%>

@@ -108,6 +108,8 @@ XPT span alias=tagAttr
 
 XPT div alias=tagAttr
 
+XPT p alias=tagAttr
+
 XPT tr abbr alias=tagAttr
 
 XPT td abbr alias=tagAttr
