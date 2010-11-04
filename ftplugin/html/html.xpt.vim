@@ -37,16 +37,16 @@ XPT doctype5 synonym=doc5 " <!DOCTYPE html>
 XPT charset " <meta charset...
 <meta charset="utf-8" />
 
-XPT skel abbr synonym=html|xhtml " xhtml skeleton
+XPT skel synonym=html|xhtml " xhtml skeleton
+XSET more=Echo('')
 `:doctype5:^
 <html>
 <head>
     `:title:^
-    `:charset:^`
-    `author^
+    `:charset:^`more^
 </head>
 <body>
-    `cursor^
+`cursor^
 </body>
 </html>
 `:copy_comment:^
@@ -74,7 +74,7 @@ XPT print alias=link
 XSET src=print.css
 XSET media=print
 
-XPT jquery abbr synonym=jq " <script... src="jquery...
+XPT jquery synonym=jq " <script... src="jquery...
 XSET ver=$jq_ver
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/`ver^/jquery.min.js"></script>
 
@@ -83,7 +83,7 @@ XSET dir=$js_dir/
 XSET src=$empty
 <script type="text/javascript" src="`dir^`src^.js"></script>
 
-XPT jplug abbr synonym=jfile|jp|jf alias=script
+XPT jplug synonym=jfile|jp|jf alias=script
 
 XPT jscript synonym=js
 <script type="text/javascript">
@@ -104,36 +104,48 @@ XSET val|post=Echo(V()=~'\V\^ id=""\$\|val' ? '' : V())
 </div>
 <!--`val^ -->
 
+XPT h1 abbr alias=_tag
+
+XPT h2 abbr alias=_tag
+
+XPT h3 abbr alias=_tag
+
+XPT h4 abbr alias=_tag
+
+XPT h5 abbr alias=_tag
+
+XPT h6 abbr alias=_tag
+
 XPT span alias=tagAttr
 
 XPT div alias=tagAttr
 
 XPT p alias=tagAttr
 
-XPT tr abbr alias=tagAttr
+XPT tr alias=tagAttr
 
-XPT td abbr alias=tagAttr
+XPT td alias=tagAttr
 
-XPT ul abbr alias=tagAttr
+XPT ul alias=tagAttr
 
-XPT ol abbr alias=tagAttr
+XPT ol alias=tagAttr
 
-XPT dl abbr alias=tagAttr
+XPT dl alias=tagAttr
 
-XPT dt abbr alias=tagAttr
+XPT dt alias=tagAttr
 
-XPT dd abbr alias=tagAttr
+XPT dd alias=tagAttr
 
-XPT br abbr alias=_shorttag
+XPT br alias=_shorttag
 
-XPT li abbr " <li>..</li>...
+XPT li " <li>..</li>...
 XSET content=Echo('')
 <li>`content^</li>`
 `...^
 <li>`content^</li>`
 `...^
 
-XPT lia abbr " <li><a href=...
+XPT lia " <li><a href=...
 XSET href=#
 `:li( { 'content' : ':a:' } ):^
 
@@ -172,12 +184,7 @@ XPT aside alias=tagAttr
 
 XPT footer alias=tagAttr
 
-XPT nav " <nav class="...
-<nav` `att?^>
-<ul>
-    `:lia:^
-</ul>
-</nav>
+XPT nav  alias=tagAttr
 
 XPT html5shiv synonym=shiv,5shiv
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

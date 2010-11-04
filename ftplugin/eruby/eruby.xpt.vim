@@ -126,3 +126,6 @@ XPT javascript_include_tag synonym=jit " <%= javascript_include_tag...
 
 XPT csrf_meta " <%= scrf_meta_tag %>
 <%= csrf_meta_tag %>
+
+XPT yield " <%= yield -%>
+<%= yield -%>

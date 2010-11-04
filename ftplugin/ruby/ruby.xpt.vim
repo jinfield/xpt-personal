@@ -2,10 +2,12 @@
 "
 XPTemplate priority=personal+
 
-XPT def " def .. end
-XSET action=Echo(' ')
-def `method^`
-    `action^
+XPT def abbr " def .. end
+def `cursor^
+end
+
+XPT if " if .. end
+if `cursor^
 end
 
 XPT attr " attr_**
@@ -53,10 +55,10 @@ XSET val='`screen^'
 XPT image_tag synonym=imt " image_tag...
 image_tag('`filename^'`, `opt?^)
 
-XPT loop wrap=content synonym=lambda " $_xSnipName args? do .. end
+XPT loop synonym=lambda " $_xSnipName args? do .. end
 XSET content=Echo('')
 `$_xSnipName^` `args^ do
-`  `content^
+`  `cursor^
 end
 
 XPT doe abbr " do .. end
@@ -102,5 +104,5 @@ should be_
 XPT shnb abbr " should_not be_
 should_not be_
 
-XPT hvs abbr
-have_selector(`^)
+XPT hvs abbr " have_selector
+have_selector
