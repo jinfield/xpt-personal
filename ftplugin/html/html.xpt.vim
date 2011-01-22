@@ -9,19 +9,25 @@ XPTvar $css_dir 'stylesheets'
 XPTvar $jq_ver '1.4.2'
 XPTvar $empty ''
 
-XPT copy_comment hidden
+XPT cpy_comment hidden
 <!-- © Copyright `strftime("%Y") $author^. All Rights Reserved. -->
 
-XPT copyright "
+XPT cpy "
 &copy;`strftime("%Y") $author^ &mdash; All Rights Reserved
 
 XPT meta
 <meta name="`$_xSnipName^" content="`meta_content^" />
 
+XPT description alias=meta " <meta name="description"...
+XSET meta_content=Echo('')
+
 XPT author alias=meta " <meta name="author"...
 XSET meta_content=$author
 
-XPT description alias=meta " <meta name="description"...
+XPT copyright alias=meta " <meta name="copyright"...
+XSET meta_content=Copyright `strftime("%Y")^ `$author^, All Rights Reserved
+
+XPT google-site-verification alias=meta
 XSET meta_content=Echo('')
 
 XPT keywords alias=meta " <meta name="keywords"...
@@ -40,22 +46,22 @@ XPT charset " <meta charset...
 XPT skel synonym=html|xhtml " xhtml skeleton
 XSET more=Echo('')
 `:doctype5:^
-<html>
+<html lang="en">
 <head>
-    `:title:^
-    `:charset:^`more^
+    `:charset:^
+    `:title:^`more^
 </head>
 <body>
 `cursor^
 </body>
 </html>
-`:copy_comment:^
+`:cpy_comment:^
 
 XPT link " <link rel='stylesheet'...
 XSET dir=$css_dir/
 XSET src=base.css
 XSET media=screen
-<link rel="stylesheet" type="text/css" href="`dir^`src^"` media="`media`"^ />
+<link rel="stylesheet" href="`dir^`src^"` media="`media`"^ />
 
 XPT alternate " <link rel='alternate'...
 XSET type=application/rss+xml
@@ -76,12 +82,12 @@ XSET media=print
 
 XPT jquery synonym=jq " <script... src="jquery...
 XSET ver=$jq_ver
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/`ver^/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/`ver^/jquery.min.js"></script>
 
 XPT script " <script... src="...
 XSET dir=$js_dir/
 XSET src=$empty
-<script type="text/javascript" src="`dir^`src^.js"></script>
+<script src="`dir^`src^.js"></script>
 
 XPT jplug synonym=jfile|jp|jf alias=script
 
